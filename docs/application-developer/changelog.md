@@ -29,6 +29,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Tabela event_log para idempotência — [1760288960-ia-code.md](1760288960-ia-code.md)
 - Tabela bot_config para parâmetros do bot — [1760289033-ia-code.md](1760289033-ia-code.md)
 - Índices de performance (phone/conversation/created_at) — [1760289111-ia-code.md](1760289111-ia-code.md)
+- Views de métricas (response-rate, TTFR, conversão) — [1760289215-ia-code.md](1760289215-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
