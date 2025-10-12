@@ -31,6 +31,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Índices de performance (phone/conversation/created_at) — [1760289111-ia-code.md](1760289111-ia-code.md)
 - Views de métricas (response-rate, TTFR, conversão) — [1760289215-ia-code.md](1760289215-ia-code.md)
 - Função SQL de valor estimado do lead — [1760289306-ia-code.md](1760289306-ia-code.md)
+- Flags `DATABASE_SAVE_DATA_*` documentadas — [1760289510-ia-code.md](1760289510-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
