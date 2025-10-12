@@ -15,6 +15,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Criado guia de contribuição — [1760285658-ia-code.md](1760285658-ia-code.md)
 - Definidas convenções de nomenclatura — [1760286707-ia-code.md](1760286707-ia-code.md)
 - Roadmap MVP → Piloto → Produção documentado — [1760286974-ia-code.md](1760286974-ia-code.md)
+- Configuração do board Kanban no GitHub Projects — [1760287092-ia-code.md](1760287092-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
