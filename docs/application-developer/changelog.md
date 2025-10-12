@@ -49,6 +49,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Função de normalização E.164 — [1760292492-ia-code.md](1760292492-ia-code.md)
 - Agrupamento de conversas por janela — [1760292630-ia-code.md](1760292630-ia-code.md)
 - Métrica de latência ponta-a-ponta — [1760292775-ia-code.md](1760292775-ia-code.md)
+- Documentados endpoints Evolution API — [1760292918-ia-code.md](1760292918-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
