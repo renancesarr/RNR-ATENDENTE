@@ -26,6 +26,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - ADR-006 estimativa de custos — [1760288660-ia-code.md](1760288660-ia-code.md)
 - Migração base de contacts/chats/messages/history — [1760288751-ia-code.md](1760288751-ia-code.md)
 - Tabelas de fatos de conversa/resposta/lead — [1760288851-ia-code.md](1760288851-ia-code.md)
+- Tabela event_log para idempotência — [1760288960-ia-code.md](1760288960-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
