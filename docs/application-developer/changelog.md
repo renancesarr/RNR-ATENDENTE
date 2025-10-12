@@ -12,6 +12,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - ADR-003 define métrica-norte e eventos de conversão — [1760271409-ia-code.md](1760271409-ia-code.md)
 - ADR-004 define estratégia de debounce — [1760277510-ia-code.md](1760277510-ia-code.md)
 - ADR-005 define política de retenção e anonimização — [1760285497-ia-code.md](1760285497-ia-code.md)
+- Criado guia de contribuição — [1760285658-ia-code.md](1760285658-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
