@@ -24,6 +24,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Script wait-for para dependências — [1760288465-ia-code.md](1760288465-ia-code.md)
 - Lista de GitHub Secrets — [1760288586-ia-code.md](1760288586-ia-code.md)
 - ADR-006 estimativa de custos — [1760288660-ia-code.md](1760288660-ia-code.md)
+- Migração base de contacts/chats/messages/history — [1760288751-ia-code.md](1760288751-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
