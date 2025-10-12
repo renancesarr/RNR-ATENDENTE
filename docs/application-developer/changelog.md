@@ -39,6 +39,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Testes SQL de integridade dos fatos — [1760290109-ia-code.md](1760290109-ia-code.md)
 - Dicionário de dados — [1760290239-ia-code.md](1760290239-ia-code.md)
 - ADR-007 pgvector vs serviço vetorial — [1760290496-ia-code.md](1760290496-ia-code.md)
+- Esquema RAG (sources/documents/embeddings) — [1760290707-ia-code.md](1760290707-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

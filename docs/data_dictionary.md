@@ -111,3 +111,31 @@
 - `justification` (text)
 - `is_active` (boolean)
 - `created_at` / `updated_at`
+
+## `rag_sources`
+- `id` (uuid, PK)
+- `name` (text, único)
+- `source_type` (text) — `document`, `faq`, etc.
+- `description` (text)
+- `metadata` (jsonb)
+- `created_at` / `updated_at`
+
+## `rag_documents`
+- `id` (uuid, PK)
+- `source_id` (uuid, FK → `rag_sources`)
+- `external_id` (text) — referência opcional.
+- `title` (text)
+- `content` (text) — conteúdo bruto.
+- `language` (text)
+- `checksum` (text, único)
+- `metadata` (jsonb)
+- `created_at` / `updated_at`
+
+## `rag_embeddings`
+- `id` (uuid, PK)
+- `document_id` (uuid, FK → `rag_documents`)
+- `chunk_index` (integer)
+- `embedding` (vector(1536))
+- `chunk` (text)
+- `metadata` (jsonb)
+- `created_at` / `updated_at`
