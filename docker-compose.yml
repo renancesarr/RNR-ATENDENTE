@@ -1,0 +1,163 @@
+version: "3.9"
+
+services:
+  evolution-api:
+    image: evoapicloud/evolution-api:v2.3.4
+    container_name: evolution_api
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "${EVOLUTION_API_HTTP_PORT:-8088}:8080"
+      - "${EVOLUTION_API_WS_PORT:-8089}:8083"
+    volumes:
+      - evolution_instances:/evolution/instances
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      # TODO: validar endpoint de saúde real da Evolution API e garantir que curl esteja disponível.
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 6
+    networks:
+      - internal
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: evolution_postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-evolution}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD not set}
+    volumes:
+      - evolution_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ${POSTGRES_DB:-evolution} -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  redis:
+    image: redis:7-alpine
+    container_name: evolution_redis
+    restart: always
+    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+    volumes:
+      - evolution_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: evolution_rabbit
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-default}
+    ports:
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+      - "${RABBITMQ_AMQP_PORT:-5672}:5672"
+    volumes:
+      - evolution_rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - internal
+
+  typebot-db:
+    image: postgres:15-alpine
+    container_name: typebot_postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=${TYPEBOT_POSTGRES_DB:-typebot}
+      - POSTGRES_PASSWORD=${TYPEBOT_POSTGRES_PASSWORD:?TYPEBOT_POSTGRES_PASSWORD not set}
+    volumes:
+      - typebot_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ${TYPEBOT_POSTGRES_DB:-typebot} -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  typebot-builder:
+    image: baptistearno/typebot-builder:latest
+    container_name: typebot_builder
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${TYPEBOT_BUILDER_PORT:-8081}:3000"
+    depends_on:
+      typebot-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - internal
+
+  typebot-viewer:
+    image: baptistearno/typebot-viewer:latest
+    container_name: typebot_viewer
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${TYPEBOT_VIEWER_PORT:-8082}:3000"
+    depends_on:
+      typebot-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - internal
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: always
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_STOPPED=false
+      - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE:-0 0 4 * * *}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - internal
+
+volumes:
+  evolution_instances:
+  evolution_pgdata:
+  evolution_redisdata:
+  evolution_rabbitmq:
+  typebot_pgdata:
+
+networks:
+  internal:
+    name: evolution_net

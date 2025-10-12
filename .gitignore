@@ -1,0 +1,47 @@
+# General OS noise
+.DS_Store
+Thumbs.db
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+
+# JavaScript/TypeScript artifacts
+node_modules/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor settings
+.idea/
+.vscode/
+
+# Logs & local state
+*.log
+*.tmp
+*.swp
+
+# Environment files
+.env
+.env.*
+
+# Dependency caches
+.cache/
+pip-wheel-metadata/
+
+# Archive dumps
+*.gz
+*.zip
+*.tar
+
+.ssh/
+
+.github/
