@@ -36,6 +36,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Tabela audit_retention (política) — [1760289717-ia-code.md](1760289717-ia-code.md)
 - Job de anonimização PII — [1760289822-ia-code.md](1760289822-ia-code.md)
 - Job de limpeza hard-delete — [1760289956-ia-code.md](1760289956-ia-code.md)
+- Testes SQL de integridade dos fatos — [1760290109-ia-code.md](1760290109-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
