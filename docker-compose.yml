@@ -77,11 +77,13 @@ services:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-admin}
       - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-default}
+      - RABBITMQ_LOAD_DEFINITIONS=/etc/rabbitmq/definitions.json
     ports:
       - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
       - "${RABBITMQ_AMQP_PORT:-5672}:5672"
     volumes:
       - evolution_rabbitmq:/var/lib/rabbitmq
+      - ./config/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "status"]
       interval: 30s

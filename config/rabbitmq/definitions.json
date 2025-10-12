@@ -1,0 +1,61 @@
+{
+  "queues": [
+    {
+      "name": "q.insights-kpi.dlq",
+      "vhost": "default",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-message-ttl": 600000
+      }
+    },
+    {
+      "name": "q.insights-kpi.quote",
+      "vhost": "default",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "dlx.evolution",
+        "x-dead-letter-routing-key": "event.conversation.quote"
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "dlx.evolution",
+      "vhost": "default",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "ex.metrics.events",
+      "vhost": "default",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "dlx.evolution",
+      "vhost": "default",
+      "destination": "q.insights-kpi.dlq",
+      "destination_type": "queue",
+      "routing_key": "event.conversation.quote",
+      "arguments": {}
+    },
+    {
+      "source": "ex.metrics.events",
+      "vhost": "default",
+      "destination": "q.insights-kpi.quote",
+      "destination_type": "queue",
+      "routing_key": "event.conversation.quote",
+      "arguments": {}
+    }
+  ]
+}
