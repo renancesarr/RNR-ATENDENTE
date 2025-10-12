@@ -96,6 +96,8 @@ services:
     image: postgres:15-alpine
     container_name: typebot_postgres
     restart: always
+    profiles:
+      - prod
     environment:
       - POSTGRES_DB=${TYPEBOT_POSTGRES_DB:-typebot}
       - POSTGRES_PASSWORD=${TYPEBOT_POSTGRES_PASSWORD:?TYPEBOT_POSTGRES_PASSWORD not set}
@@ -113,6 +115,8 @@ services:
     image: baptistearno/typebot-builder:latest
     container_name: typebot_builder
     restart: always
+    profiles:
+      - prod
     env_file:
       - .env
     ports:
@@ -132,6 +136,8 @@ services:
     image: baptistearno/typebot-viewer:latest
     container_name: typebot_viewer
     restart: always
+    profiles:
+      - prod
     env_file:
       - .env
     ports:
@@ -151,6 +157,8 @@ services:
     image: containrrr/watchtower:latest
     container_name: watchtower
     restart: always
+    profiles:
+      - prod
     environment:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_INCLUDE_STOPPED=false

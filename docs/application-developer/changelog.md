@@ -20,6 +20,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Scripts de backup/restore do Postgres — [1760287801-ia-code.md](1760287801-ia-code.md)
 - Redis configurado como cache-only — [1760288050-ia-code.md](1760288050-ia-code.md)
 - DLQ configurado no RabbitMQ — [1760288183-ia-code.md](1760288183-ia-code.md)
+- Perfis dev/prod no docker-compose — [1760288357-ia-code.md](1760288357-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
