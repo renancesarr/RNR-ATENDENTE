@@ -27,6 +27,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Migração base de contacts/chats/messages/history — [1760288751-ia-code.md](1760288751-ia-code.md)
 - Tabelas de fatos de conversa/resposta/lead — [1760288851-ia-code.md](1760288851-ia-code.md)
 - Tabela event_log para idempotência — [1760288960-ia-code.md](1760288960-ia-code.md)
+- Tabela bot_config para parâmetros do bot — [1760289033-ia-code.md](1760289033-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
