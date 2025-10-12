@@ -29,9 +29,40 @@ env/
 *.tmp
 *.swp
 
-# Environment files
+# Environment files & secrets
 .env
 .env.*
+.secrets/
+secrets/
+*.envrc
+*.secret
+*.enc
+
+# Credentials & security artifacts
+.ssh/
+.aws/
+.azure/
+.gcp/
+.kube/
+certs/
+certificates/
+private/
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.pfx
+*.p12
+*.jks
+*.keystore
+*.tfvars
+*.tfvars.json
+terraform.tfstate
+terraform.tfstate.*
+*.tfstate
+*.gpg
+*.pgp
 
 # Dependency caches
 .cache/
@@ -42,6 +73,5 @@ pip-wheel-metadata/
 *.zip
 *.tar
 
-.ssh/
-
+# Repository metadata
 .github/
