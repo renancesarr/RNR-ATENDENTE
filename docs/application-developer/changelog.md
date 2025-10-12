@@ -34,6 +34,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Flags `DATABASE_SAVE_DATA_*` documentadas — [1760289510-ia-code.md](1760289510-ia-code.md)
 - Seed de catálogo de produtos (mock) — [1760289605-ia-code.md](1760289605-ia-code.md)
 - Tabela audit_retention (política) — [1760289717-ia-code.md](1760289717-ia-code.md)
+- Job de anonimização PII — [1760289822-ia-code.md](1760289822-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
