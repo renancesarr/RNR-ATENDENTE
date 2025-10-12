@@ -21,6 +21,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Redis configurado como cache-only — [1760288050-ia-code.md](1760288050-ia-code.md)
 - DLQ configurado no RabbitMQ — [1760288183-ia-code.md](1760288183-ia-code.md)
 - Perfis dev/prod no docker-compose — [1760288357-ia-code.md](1760288357-ia-code.md)
+- Script wait-for para dependências — [1760288465-ia-code.md](1760288465-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
