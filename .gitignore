@@ -32,6 +32,7 @@ env/
 # Environment files & secrets
 .env
 .env.*
+!.env.example
 .secrets/
 secrets/
 *.envrc
