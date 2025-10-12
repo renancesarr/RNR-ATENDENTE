@@ -51,9 +51,16 @@ services:
     image: redis:7-alpine
     container_name: evolution_redis
     restart: always
-    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
-    volumes:
-      - evolution_redisdata:/data
+    command:
+      - redis-server
+      - --save
+      - ""
+      - --appendonly
+      - "no"
+      - --loglevel
+      - warning
+    tmpfs:
+      - /data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -154,7 +161,6 @@ services:
 volumes:
   evolution_instances:
   evolution_pgdata:
-  evolution_redisdata:
   evolution_rabbitmq:
   typebot_pgdata:
 
