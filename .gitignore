@@ -74,4 +74,7 @@ pip-wheel-metadata/
 *.zip
 *.tar
 
+# Local backups
+backups/
+
 # Repository metadata

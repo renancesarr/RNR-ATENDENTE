@@ -17,6 +17,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Roadmap MVP → Piloto → Produção documentado — [1760286974-ia-code.md](1760286974-ia-code.md)
 - Configuração do board Kanban no GitHub Projects — [1760287092-ia-code.md](1760287092-ia-code.md)
 - Migração bootstrap de role e banco no Postgres — [1760287092-ia-code.md](1760287092-ia-code.md)
+- Scripts de backup/restore do Postgres — [1760287801-ia-code.md](1760287801-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
