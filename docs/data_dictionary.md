@@ -129,6 +129,7 @@
 - `language` (text)
 - `checksum` (text, único)
 - `metadata` (jsonb)
+- `revision` (integer)
 - `created_at` / `updated_at`
 
 ## `rag_embeddings`
@@ -139,3 +140,12 @@
 - `chunk` (text)
 - `metadata` (jsonb)
 - `created_at` / `updated_at`
+
+## `rag_document_revisions`
+- `id` (bigserial, PK)
+- `document_id` (uuid, FK → `rag_documents`)
+- `revision` (integer)
+- `content` (text)
+- `checksum` (text)
+- `metadata` (jsonb)
+- `created_at` (timestamptz)

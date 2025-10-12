@@ -41,6 +41,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - ADR-007 pgvector vs serviço vetorial — [1760290496-ia-code.md](1760290496-ia-code.md)
 - Esquema RAG (sources/documents/embeddings) — [1760290707-ia-code.md](1760290707-ia-code.md)
 - CLI de ingestão RAG — [1760290829-ia-code.md](1760290829-ia-code.md)
+- Versionamento de documentos RAG — [1760290998-ia-code.md](1760290998-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
