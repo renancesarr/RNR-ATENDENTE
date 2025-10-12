@@ -23,6 +23,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Perfis dev/prod no docker-compose — [1760288357-ia-code.md](1760288357-ia-code.md)
 - Script wait-for para dependências — [1760288465-ia-code.md](1760288465-ia-code.md)
 - Lista de GitHub Secrets — [1760288586-ia-code.md](1760288586-ia-code.md)
+- ADR-006 estimativa de custos — [1760288660-ia-code.md](1760288660-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
