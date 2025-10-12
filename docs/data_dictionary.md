@@ -149,3 +149,13 @@
 - `checksum` (text)
 - `metadata` (jsonb)
 - `created_at` (timestamptz)
+
+## `rag_embedding_jobs`
+- `id` (bigserial, PK)
+- `document_id` (uuid, FK → `rag_documents`)
+- `status` (text) — `pending`, `running`, `failed`, `done`.
+- `retries` (integer)
+- `scheduled_at` / `started_at` / `finished_at`
+- `error_message` (text)
+- `payload` (jsonb)
+- `created_at` / `updated_at`

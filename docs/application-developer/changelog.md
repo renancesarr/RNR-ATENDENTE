@@ -42,6 +42,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Esquema RAG (sources/documents/embeddings) — [1760290707-ia-code.md](1760290707-ia-code.md)
 - CLI de ingestão RAG — [1760290829-ia-code.md](1760290829-ia-code.md)
 - Versionamento de documentos RAG — [1760290998-ia-code.md](1760290998-ia-code.md)
+- Jobs de atualização de embeddings — [1760291138-ia-code.md](1760291138-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
