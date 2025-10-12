@@ -6,6 +6,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Adicionada licença MIT ao repositório — [1760268592-ia-code.md](1760268592-ia-code.md)
 - Ampliado `.gitignore` para cobrir artefatos sensíveis de credenciais — [1760268860-ia-code.md](1760268860-ia-code.md)
 - Habilitados templates de Issue/PR e versionamento de `.github/` — [1760269187-ia-code.md](1760269187-ia-code.md)
+- ADR-000 documenta arquitetura geral do MVP — [1760269685-ia-code.md](1760269685-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
