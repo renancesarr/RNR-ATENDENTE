@@ -1,0 +1,27 @@
+name: IA Guard
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate-ia-change:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Git user for diff commands
+        run: |
+          git config --global user.email "ci@example.com"
+          git config --global user.name "CI Bot"
+
+      - name: Ensure validation script is executable
+        run: chmod +x tools/validate-ia-change.sh
+
+      - name: Run IA change validator
+        run: |
+          git fetch origin main || true
+          git diff --name-only origin/main || true
+          tools/validate-ia-change.sh
