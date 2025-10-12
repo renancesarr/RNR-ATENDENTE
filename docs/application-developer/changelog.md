@@ -44,6 +44,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Versionamento de documentos RAG — [1760290998-ia-code.md](1760290998-ia-code.md)
 - Jobs de atualização de embeddings — [1760291138-ia-code.md](1760291138-ia-code.md)
 - Testes de busca semântica — [1760291267-ia-code.md](1760291267-ia-code.md)
+- CLI de bootstrap da Evolution API — [1760291414-ia-code.md](1760291414-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
