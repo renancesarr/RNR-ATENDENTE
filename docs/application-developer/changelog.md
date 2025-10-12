@@ -10,6 +10,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - ADR-001 define política de segredos — [1760270176-ia-code.md](1760270176-ia-code.md)
 - ADR-002 define estratégia de RAG — [1760270378-ia-code.md](1760270378-ia-code.md)
 - ADR-003 define métrica-norte e eventos de conversão — [1760271409-ia-code.md](1760271409-ia-code.md)
+- ADR-004 define estratégia de debounce — [1760277510-ia-code.md](1760277510-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
