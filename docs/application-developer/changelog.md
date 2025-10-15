@@ -65,6 +65,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Remoção do `.env` inadvertidamente commitado — [1760534671-ia-code.md](1760534671-ia-code.md)
 - Docs do compose movidas para Solution Architect — [1760537762-ia-code.md](1760537762-ia-code.md)
 - Backlog T-001..T-150 atualizado com status — [1760540039-ia-code.md](1760540039-ia-code.md)
+- Makefile/atalhos compose criados — [1760546054-ia-code.md](1760546054-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

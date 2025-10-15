@@ -24,6 +24,7 @@ docker compose up -d
 - Para incluir os serviços opcionais (`typebot-*`, `watchtower`), utilize `docker compose --profile prod up -d`.
 - Também é possível usar o script automatizado: `./start.sh` (adicionar `--with-prod` para incluir o perfil `prod`). O script gera/atualiza `docker-compose.yaml` com todas as variáveis resolvidas — o arquivo é sobrescrito a cada execução e não deve ser versionado.
 - Para encerrar o ambiente manualmente use `./stop.sh`; para smoke test completo (stop ➜ start ➜ validação ➜ stop) utilize `./start.test.sh [--with-prod] [--skip-pull]`. O script tenta novamente o healthcheck da Evolution API por até 10 tentativas (intervalo padrão 60 s) e aguarda containers `starting` estabilizarem.
+- Para facilitar, use o `Makefile`: `make up` (ou `START_FLAGS=--skip-pull make up`), `make up-prod`, `make down`, `make logs LOG_SERVICE=evolution-api`, `make test`.
 
 ## 3. Confirmar que tudo está healthy
 ```bash
