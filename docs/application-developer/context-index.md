@@ -6,8 +6,6 @@ Referência rápida dos artefatos que influenciam decisões de desenvolvimento.
 - `README.md` — Visão geral, stack e regras operacionais.
 - `docs/application-developer/README.md` — Normas específicas para execução IA.
 - `docs/application-developer/pre-flight.md` — Checklist obrigatório antes de iniciar.
-- `docs/solution-architect/docker-compose-core.md` — Resumo dos serviços essenciais (T-016 a T-020).
-- `docs/solution-architect/docker-compose-profiles.md` — Perfis `dev`/`prod` e serviços opcionais.
 - `docs/application-developer/compose-validation.md` — Passo a passo para subir o compose e validar endpoints.
 
 ## Histórico IA
@@ -21,7 +19,7 @@ Referência rápida dos artefatos que influenciam decisões de desenvolvimento.
 - `docs/scrum-master/` — Impedimentos, cerimônias e ações corretivas.
 - `docs/scrum-master/impediments-retention.md` — Bloqueio atual sobre política de retenção e próximos passos jurídicos.
 - `docs/business-model/` — Hipóteses de monetização e métricas-alvo.
-- `docs/solution-architect/` — Artefatos e decisões de arquitetura.
+- `docs/solution-architect/` — Artefatos e decisões de arquitetura (compose, segredos, retenção, métricas, pipelines RAG, etc.).
 - `docs/decisions/` — ADRs oficiais (histórico completo de decisões técnicas).
 
 ## Observabilidade e métricas
