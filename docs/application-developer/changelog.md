@@ -68,6 +68,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Makefile/atalhos compose criados — [1760546054-ia-code.md](1760546054-ia-code.md)
 - Proxy Nginx com API key (T-023) — [1760546452-ia-code.md](1760546452-ia-code.md)
 - Portas e exposição documentadas — [1760547320-ia-code.md](1760547320-ia-code.md)
+- Teste de carga leve do boot — [1760567848-ia-code.md](1760567848-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

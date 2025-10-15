@@ -256,7 +256,7 @@ Dep: T-023
   
   _Labels:_ `docs,security`
 
-- [ ] **T-033** — Teste de carga leve no boot
+- [x] **T-033** — Teste de carga leve no boot
   
   Descrição: Medir latências pós-boot.
 CA: Relatório simples.
