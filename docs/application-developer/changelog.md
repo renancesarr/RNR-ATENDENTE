@@ -61,6 +61,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Scripts stop/start.test e ciclo de limpeza automática — [1760531382-ia-code.md](1760531382-ia-code.md)
 - Ajuste no start.sh para leitura segura do .env — [1760532210-ia-code.md](1760532210-ia-code.md)
 - Retries para healthcheck/start testável — [1760533475-ia-code.md](1760533475-ia-code.md)
+- Healthcheck da Evolution API aponta para `/` — [1760534097-ia-code.md](1760534097-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

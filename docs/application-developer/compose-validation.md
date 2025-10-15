@@ -61,8 +61,8 @@ curl -fsS http://localhost:${EVOLUTION_API_HTTP_PORT:-8088}/status
   curl -H "Authorization: Bearer ${EVOLUTION_AUTH_KEY}" \
        http://localhost:${EVOLUTION_API_HTTP_PORT:-8088}/status
   ```
-- Se o endpoint real divergir de `/status`, ajuste o comando e atualize `docker-compose.yml` (seção `healthcheck`) para refletir o caminho correto.
-- O script `start.sh` permite definir o caminho via variável `EVOLUTION_HEALTHCHECK_PATH` no `.env` (padrão: `/status`).
+- Se o endpoint real divergir da raiz `/`, ajuste o comando e atualize `docker-compose.yml` (seção `healthcheck`) para refletir o caminho correto.
+- O script `start.sh` permite definir o caminho via variável `EVOLUTION_HEALTHCHECK_PATH` no `.env` (padrão atual: `/`).
 
 ## 6. Monitorar logs em tempo real
 ```bash
