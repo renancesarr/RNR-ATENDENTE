@@ -54,6 +54,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Retenção adiada: backlog futuro e impedimento registrado — [1760518973-ia-code.md](1760518973-ia-code.md)
 - Compose essencial (T-016 a T-020) documentado — [1760519783-ia-code.md](1760519783-ia-code.md)
 - Guia de execução do compose e validação de endpoint — [1760520067-ia-code.md](1760520067-ia-code.md)
+- Nota sobre uso do `.env` no compose — [1760522508-ia-code.md](1760522508-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

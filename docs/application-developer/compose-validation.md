@@ -13,6 +13,9 @@ cp .env.example .env            # se ainda não existir
 docker compose pull             # garante imagens mais recentes
 ```
 
+> Execute todos os comandos a partir da raiz do repositório para que o Docker Compose carregue o arquivo `.env` automaticamente.  
+> Se precisar rodar em outra pasta, especifique o arquivo manualmente: `docker compose --env-file /caminho/para/.env up -d`.
+
 ## 2. Subir os serviços essenciais
 ```bash
 docker compose up -d
