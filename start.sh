@@ -138,8 +138,8 @@ run_compose_exec redis redis-cli ping
 echo "==> Checando RabbitMQ..."
 run_compose_exec rabbitmq rabbitmq-diagnostics -q status
 
-echo "==> Obtendo porta mapeada da Evolution API..."
-API_PORT_RAW="$(compose_cmd port evolution-api 8080 || true)"
+echo "==> Obtendo porta mapeada do proxy da Evolution API..."
+API_PORT_RAW="$(compose_cmd port reverse-proxy 8080 || true)"
 if [[ -z "$API_PORT_RAW" ]]; then
   echo "error: não foi possível determinar a porta da Evolution API. Verifique se o serviço está em execução." >&2
   exit 1

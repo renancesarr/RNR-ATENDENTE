@@ -248,7 +248,7 @@ Dep: T-016
   
   _Labels:_ `infra,dx`
 
-- [ ] **T-032** — Documentar portas e exposição
+- [x] **T-032** — Documentar portas e exposição
   
   Descrição: Tabela de portas; recomendações de segurança.
 CA: README atualizado.

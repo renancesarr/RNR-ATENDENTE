@@ -9,6 +9,7 @@
   - `github-secrets.md` — catálogo de segredos e políticas de proteção.
   - `openai-credentials.md` — estratégia de injeção de credenciais OpenAI.
   - `database-save-flags.md` — parâmetros de persistência da Evolution API.
+  - `ports-and-exposure.md` — portas expostas, recomendações de segurança e proxy.
   - `postgres-backup.md` — plano de backup/restore do banco principal.
   - `anonymization-job.md` / `retention-hard-delete.md` — políticas de retenção e limpeza.
   - `message-windows.md`, `response-latency.md`, `fact-tests.md` — métricas e validações SQL.
