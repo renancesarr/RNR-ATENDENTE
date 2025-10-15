@@ -25,3 +25,8 @@ Rastreia itens adiados do MVP relacionados a políticas de retenção, anonimiza
   - Mapear impactos de manter dados brutos além da janela prevista (custos, privacidade, incidentes).  
   - Criar plano de rollback caso anonimização/purge gere perda de informação crítica.  
   - Estabelecer monitoramento mínimo (alertas, métricas) a ser ativado quando jobs forem oficializados.
+
+- **Automação de ciclo start/stop/teste**  
+  - Formalizar scripts `start.sh`, `stop.sh` e `start.test.sh` como parte do fluxo de QA local.  
+  - Garantir que a lista de containers (docker/container-names.txt) permaneça sincronizada com o compose.  
+  - Documentar critérios de sucesso/falha do `start.test.sh` e incorporar o smoke test à rotina de validação.

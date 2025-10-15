@@ -1,0 +1,11 @@
+# Lista de containers gerenciados pelos scripts start/stop
+# Mantenha os nomes sincronizados com `docker-compose.yml`.
+
+evolution_api
+evolution_postgres
+evolution_redis
+evolution_rabbit
+typebot_postgres
+typebot_builder
+typebot_viewer
+watchtower

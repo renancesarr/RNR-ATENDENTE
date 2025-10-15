@@ -62,6 +62,11 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+STOP_SCRIPT="$PROJECT_ROOT/stop.sh"
+if [[ -x "$STOP_SCRIPT" ]]; then
+  "$STOP_SCRIPT" --quiet || true
+fi
+
 COMPOSE_ARGS=()
 if $INCLUDE_PROD; then
   COMPOSE_ARGS+=(--profile prod)
