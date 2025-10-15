@@ -53,6 +53,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Placeholders e processo de credenciais OpenAI — [1760293023-ia-code.md](1760293023-ia-code.md)
 - Retenção adiada: backlog futuro e impedimento registrado — [1760518973-ia-code.md](1760518973-ia-code.md)
 - Compose essencial (T-016 a T-020) documentado — [1760519783-ia-code.md](1760519783-ia-code.md)
+- Guia de execução do compose e validação de endpoint — [1760520067-ia-code.md](1760520067-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

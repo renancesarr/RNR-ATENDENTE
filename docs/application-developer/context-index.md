@@ -7,6 +7,7 @@ Referência rápida dos artefatos que influenciam decisões de desenvolvimento.
 - `docs/application-developer/README.md` — Normas específicas para execução IA.
 - `docs/application-developer/pre-flight.md` — Checklist obrigatório antes de iniciar.
 - `docs/application-developer/docker-compose-core.md` — Resumo dos serviços essenciais (T-016 a T-020).
+- `docs/application-developer/compose-validation.md` — Passo a passo para subir o compose e validar endpoints.
 
 ## Histórico IA
 - `docs/application-developer/changelog.md` — Resumo mensal das entregas IA.
