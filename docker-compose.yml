@@ -18,7 +18,7 @@ services:
       postgres:
         condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
       rabbitmq:
         condition: service_healthy
     healthcheck:
@@ -165,6 +165,11 @@ services:
       - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE:-0 0 4 * * *}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "watchtower", "--version"]
+      interval: 5m
+      timeout: 30s
+      retries: 1
     networks:
       - internal
 

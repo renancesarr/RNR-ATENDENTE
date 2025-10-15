@@ -52,6 +52,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Documentados endpoints Evolution API — [1760292918-ia-code.md](1760292918-ia-code.md)
 - Placeholders e processo de credenciais OpenAI — [1760293023-ia-code.md](1760293023-ia-code.md)
 - Retenção adiada: backlog futuro e impedimento registrado — [1760518973-ia-code.md](1760518973-ia-code.md)
+- Compose essencial (T-016 a T-020) documentado — [1760519783-ia-code.md](1760519783-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
