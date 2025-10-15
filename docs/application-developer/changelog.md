@@ -51,6 +51,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Métrica de latência ponta-a-ponta — [1760292775-ia-code.md](1760292775-ia-code.md)
 - Documentados endpoints Evolution API — [1760292918-ia-code.md](1760292918-ia-code.md)
 - Placeholders e processo de credenciais OpenAI — [1760293023-ia-code.md](1760293023-ia-code.md)
+- Retenção adiada: backlog futuro e impedimento registrado — [1760518973-ia-code.md](1760518973-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

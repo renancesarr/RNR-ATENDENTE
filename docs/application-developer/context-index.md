@@ -14,7 +14,9 @@ Referência rápida dos artefatos que influenciam decisões de desenvolvimento.
 
 ## Governança e processo
 - `docs/project-manager/` — Backlog atômico e checkpoints de entrega.
+- `docs/project-manager/future-backlog.md` — Itens postergados (pós-MVP) aguardando decisão humana.
 - `docs/scrum-master/` — Impedimentos, cerimônias e ações corretivas.
+- `docs/scrum-master/impediments-retention.md` — Bloqueio atual sobre política de retenção e próximos passos jurídicos.
 - `docs/business-model/` — Hipóteses de monetização e métricas-alvo.
 - `docs/solution-architect/` — Artefatos e decisões de arquitetura.
 - `docs/decisions/` — ADRs oficiais (histórico completo de decisões técnicas).
