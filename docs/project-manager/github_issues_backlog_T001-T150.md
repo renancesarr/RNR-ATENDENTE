@@ -1,6 +1,6 @@
 # Backlog T-001 a T-150 (Checklist para GitHub Issues)
 
-- [ ] **T-001** — Criar repositório + branches main/develop
+- [x] **T-001** — Criar repositório + branches main/develop
   
   Descrição: Criar repo (privado/público), proteger branches main/develop.
 CA: Repo criado; branches protegidas.
@@ -8,7 +8,7 @@ Dep: —
   
   _Labels:_ `planning,repo`
 
-- [ ] **T-002** — Adicionar .gitignore (Node, Python, Docker, logs)
+- [x] **T-002** — Adicionar .gitignore (Node, Python, Docker, logs)
   
   Descrição: Arquivo .gitignore cobrindo artefatos comuns e logs.
 CA: Itens indesejados ignorados.
@@ -16,7 +16,7 @@ Dep: T-001
   
   _Labels:_ `planning,repo`
 
-- [ ] **T-003** — Criar README.md com visão MVP e KPIs
+- [x] **T-003** — Criar README.md com visão MVP e KPIs
   
   Descrição: Escrever README com objetivo, KPIs, stack e como rodar.
 CA: Seções presentes e claras.
@@ -24,7 +24,7 @@ Dep: T-001
   
   _Labels:_ `planning,docs`
 
-- [ ] **T-004** — Definir LICENSE (MIT/Apache2)
+- [x] **T-004** — Definir LICENSE (MIT/Apache2)
   
   Descrição: Escolher licença (MIT/Apache2) e adicionar arquivo LICENSE.
 CA: LICENSE no repo.
@@ -32,7 +32,7 @@ Dep: T-001
   
   _Labels:_ `planning,legal`
 
-- [ ] **T-005** — Criar templates de Issue e PR
+- [x] **T-005** — Criar templates de Issue e PR
   
   Descrição: Adicionar .github/ISSUE_TEMPLATE e PULL_REQUEST_TEMPLATE.md.
 CA: Templates ativos.
@@ -40,7 +40,7 @@ Dep: T-001
   
   _Labels:_ `planning,repo`
 
-- [ ] **T-006** — ADR-000: Arquitetura geral
+- [x] **T-006** — ADR-000: Arquitetura geral
   
   Descrição: Documentar arquitetura (Evolution API, Postgres, Redis, RabbitMQ, OpenAI).
 CA: docs/decisions/ADR-000.md commitado.
@@ -48,7 +48,7 @@ Dep: T-003
   
   _Labels:_ `planning,adr,architecture`
 
-- [ ] **T-007** — ADR-001: Política de segredos
+- [x] **T-007** — ADR-001: Política de segredos
   
   Descrição: Definir uso de Vault/GitHub Secrets e proibições.
 CA: ADR publicado.
@@ -56,7 +56,7 @@ Dep: T-006
   
   _Labels:_ `security,adr`
 
-- [ ] **T-008** — ADR-002: Estratégia de RAG
+- [x] **T-008** — ADR-002: Estratégia de RAG
   
   Descrição: Fontes, embeddings, top-k, fallback e custos.
 CA: Trade-offs documentados.
@@ -64,7 +64,7 @@ Dep: T-006
   
   _Labels:_ `adr,rag`
 
-- [ ] **T-009** — ADR-003: Métrica-norte e eventos de conversão
+- [x] **T-009** — ADR-003: Métrica-norte e eventos de conversão
   
   Descrição: Definir 'pedido de orçamento' e TTFR (tempo até 1ª resposta).
 CA: Eventos e cálculo definidos.
@@ -72,7 +72,7 @@ Dep: T-003
   
   _Labels:_ `adr,metrics`
 
-- [ ] **T-010** — ADR-004: Estratégia de debounce (30–120s)
+- [x] **T-010** — ADR-004: Estratégia de debounce (30–120s)
   
   Descrição: Definir janelas por cenário e impacto.
 CA: Tabela de cenários e janelas.
@@ -80,7 +80,7 @@ Dep: T-006
   
   _Labels:_ `adr,bot`
 
-- [ ] **T-011** — ADR-005: Retenção/anonimização
+- [x] **T-011** — ADR-005: Retenção/anonimização
   
   Descrição: Política parametrizável para PII e histórico.
 CA: Parâmetros definidos.
@@ -88,7 +88,7 @@ Dep: T-007
   
   _Labels:_ `adr,security,privacy`
 
-- [ ] **T-012** — Criar CONTRIBUTING.md
+- [x] **T-012** — Criar CONTRIBUTING.md
   
   Descrição: Guia de contribuição, convenções, testes.
 CA: Arquivo presente.
@@ -96,7 +96,7 @@ Dep: T-003
   
   _Labels:_ `docs,repo`
 
-- [ ] **T-013** — Definir convenções de nomes
+- [x] **T-013** — Definir convenções de nomes
   
   Descrição: Padrões para tabelas, filas, exchanges, serviços.
 CA: /docs/standards.md.
@@ -104,7 +104,7 @@ Dep: T-006
   
   _Labels:_ `architecture,docs`
 
-- [ ] **T-014** — Roadmap de releases (MVP → Piloto → Produção)
+- [x] **T-014** — Roadmap de releases (MVP → Piloto → Produção)
   
   Descrição: Roadmap e critérios de promoção.
 CA: /docs/roadmap.md.
@@ -112,7 +112,7 @@ Dep: T-003
   
   _Labels:_ `planning,docs`
 
-- [ ] **T-015** — Configurar Kanban no GitHub Projects
+- [x] **T-015** — Configurar Kanban no GitHub Projects
   
   Descrição: Criar colunas To do / Doing / Review / Done.
 CA: Board ativo.
@@ -120,7 +120,7 @@ Dep: T-001
   
   _Labels:_ `planning,repo`
 
-- [ ] **T-016** — docker-compose: Postgres e Redis
+- [x] **T-016** — docker-compose: Postgres e Redis
   
   Descrição: Compose com Postgres e Redis; volumes e network básicos.
 CA: docker compose up sobe 2 serviços.
@@ -128,7 +128,7 @@ Dep: T-013
   
   _Labels:_ `infra,docker`
 
-- [ ] **T-017** — Adicionar RabbitMQ ao compose
+- [x] **T-017** — Adicionar RabbitMQ ao compose
   
   Descrição: Serviço RabbitMQ (+ mgmt opcional) com usuários e vhost.
 CA: Fila acessível.
@@ -136,7 +136,7 @@ Dep: T-016
   
   _Labels:_ `infra,docker,queue`
 
-- [ ] **T-018** — Adicionar Evolution API ao compose
+- [x] **T-018** — Adicionar Evolution API ao compose
   
   Descrição: Serviço evolution com healthcheck e variáveis de ambiente.
 CA: Serviço healthy.
@@ -144,7 +144,7 @@ Dep: T-017
   
   _Labels:_ `infra,docker,api`
 
-- [ ] **T-019** — Volume /evolution/instances
+- [x] **T-019** — Volume /evolution/instances
   
   Descrição: Montar volume persistente para sessões WhatsApp.
 CA: Volume configurado.
@@ -152,7 +152,7 @@ Dep: T-018
   
   _Labels:_ `infra,docker,storage`
 
-- [ ] **T-020** — Healthchecks para todos os serviços
+- [x] **T-020** — Healthchecks para todos os serviços
   
   Descrição: Adicionar healthchecks consistentes a compose.
 CA: Todos healthy após boot.
@@ -160,7 +160,7 @@ Dep: T-018
   
   _Labels:_ `infra,observability`
 
-- [ ] **T-021** — Criar env/.env.example
+- [x] **T-021** — Criar env/.env.example
   
   Descrição: Placeholders de Postgres, Redis, RabbitMQ, API keys.
 CA: Arquivo comentado.
@@ -184,7 +184,7 @@ Dep: T-018
   
   _Labels:_ `infra,security,api`
 
-- [ ] **T-024** — Rede docker dedicada
+- [x] **T-024** — Rede docker dedicada
   
   Descrição: Criar bridge específica para serviços.
 CA: Network nomeada criada.
@@ -192,7 +192,7 @@ Dep: T-016
   
   _Labels:_ `infra,docker`
 
-- [ ] **T-025** — Criar usuário/DB no Postgres (migração bootstrap)
+- [x] **T-025** — Criar usuário/DB no Postgres (migração bootstrap)
   
   Descrição: Script/migração para role e database.
 CA: DB e role criados.
@@ -200,7 +200,7 @@ Dep: T-016
   
   _Labels:_ `db,migrations`
 
-- [ ] **T-026** — Backup local do Postgres (pg_dump cron)
+- [x] **T-026** — Backup local do Postgres (pg_dump cron)
   
   Descrição: Script de backup e doc de restore.
 CA: Backup e restore testados.
@@ -208,7 +208,7 @@ Dep: T-025
   
   _Labels:_ `db,backup`
 
-- [ ] **T-027** — Seed de dados mínimos
+- [x] **T-027** — Seed de dados mínimos
   
   Descrição: Seed idempotente (admin interno, flags).
 CA: Seed reexecutável.
@@ -216,7 +216,7 @@ Dep: T-025
   
   _Labels:_ `db,seed`
 
-- [ ] **T-028** — Configurar Redis cache-only
+- [x] **T-028** — Configurar Redis cache-only
   
   Descrição: Desativar persistência (appendonly no).
 CA: Redis como cache.
@@ -224,7 +224,7 @@ Dep: T-016
   
   _Labels:_ `infra,cache`
 
-- [ ] **T-029** — DLQ no RabbitMQ
+- [x] **T-029** — DLQ no RabbitMQ
   
   Descrição: Exchanges/bindings/TTL para dead letters.
 CA: DLQ ativo.
@@ -232,7 +232,7 @@ Dep: T-017
   
   _Labels:_ `queue,reliability`
 
-- [ ] **T-030** — Profiles dev vs prod no compose
+- [x] **T-030** — Profiles dev vs prod no compose
   
   Descrição: Alternar serviços extras com --profile.
 CA: Perfis funcionando.
@@ -240,7 +240,7 @@ Dep: T-016
   
   _Labels:_ `infra,docker`
 
-- [ ] **T-031** — Script wait-for-it/dockerize
+- [x] **T-031** — Script wait-for-it/dockerize
   
   Descrição: Sincronizar inicialização por dependências.
 CA: Ordem robusta.
@@ -264,7 +264,7 @@ Dep: T-020
   
   _Labels:_ `infra,performance`
 
-- [ ] **T-034** — Configurar GitHub Secrets (placeholders)
+- [x] **T-034** — Configurar GitHub Secrets (placeholders)
   
   Descrição: Nomear todos os secrets exigidos.
 CA: Lista completa no repo.
@@ -272,7 +272,7 @@ Dep: T-007
   
   _Labels:_ `security,repo`
 
-- [ ] **T-035** — ADR-006: Estimativa de custos infra
+- [x] **T-035** — ADR-006: Estimativa de custos infra
   
   Descrição: Estimar custos por serviço.
 CA: ADR com planilha.
@@ -280,7 +280,7 @@ Dep: T-016
   
   _Labels:_ `adr,costs`
 
-- [ ] **T-036** — Esquema base: messages/contacts/chats/history
+- [x] **T-036** — Esquema base: messages/contacts/chats/history
   
   Descrição: Diagrama e migrações para entidades core.
 CA: Migrações aplicáveis.
@@ -288,7 +288,7 @@ Dep: T-013, T-025
   
   _Labels:_ `db,modeling`
 
-- [ ] **T-037** — Tabelas de fatos para KPIs
+- [x] **T-037** — Tabelas de fatos para KPIs
   
   Descrição: fact_conversation, fact_response, fact_lead.
 CA: Chaves/índices/FK.
@@ -296,7 +296,7 @@ Dep: T-036
   
   _Labels:_ `db,metrics`
 
-- [ ] **T-038** — Tabela event_log (idempotência)
+- [x] **T-038** — Tabela event_log (idempotência)
   
   Descrição: Log de eventos com chave natural (event_id).
 CA: Unicidade garantida.
@@ -304,7 +304,7 @@ Dep: T-037
   
   _Labels:_ `db,reliability`
 
-- [ ] **T-039** — Tabela bot_config (debounce, modelos, limites)
+- [x] **T-039** — Tabela bot_config (debounce, modelos, limites)
   
   Descrição: Configuração dinâmica do bot.
 CA: CRUD mínimo.
@@ -312,7 +312,7 @@ Dep: T-036
   
   _Labels:_ `db,bot`
 
-- [ ] **T-040** — Índices de performance
+- [x] **T-040** — Índices de performance
   
   Descrição: phone, conversation_id, created_at.
 CA: EXPLAIN usando índices.
@@ -320,7 +320,7 @@ Dep: T-036
   
   _Labels:_ `db,performance`
 
-- [ ] **T-041** — Views de métricas (response-rate/TTFR/conversão)
+- [x] **T-041** — Views de métricas (response-rate/TTFR/conversão)
   
   Descrição: 3 views com cálculos validados.
 CA: SELECTs retornam valores coerentes.
@@ -328,7 +328,7 @@ Dep: T-037
   
   _Labels:_ `db,metrics`
 
-- [ ] **T-042** — Função SQL de valor estimado do lead (v1)
+- [x] **T-042** — Função SQL de valor estimado do lead (v1)
   
   Descrição: Heurística parametrizada.
 CA: Função e testes.
@@ -336,7 +336,7 @@ Dep: T-037
   
   _Labels:_ `db,metrics`
 
-- [ ] **T-043** — Habilitar DATABASE_SAVE_DATA_*
+- [x] **T-043** — Habilitar DATABASE_SAVE_DATA_*
   
   Descrição: Flags para persistência total. Documentar.
 CA: Flags ativas e auditadas.
@@ -344,7 +344,7 @@ Dep: T-036
   
   _Labels:_ `db,config`
 
-- [ ] **T-044** — Seed de catálogo de produtos (mock)
+- [x] **T-044** — Seed de catálogo de produtos (mock)
   
   Descrição: 5–10 itens representativos.
 CA: Dados carregados.
@@ -352,7 +352,7 @@ Dep: T-036
   
   _Labels:_ `db,seed`
 
-- [ ] **T-045** — Tabela audit_retention (política)
+- [x] **T-045** — Tabela audit_retention (política)
   
   Descrição: scrub_after_days, delete_after_months.
 CA: Migração criada.
@@ -360,7 +360,7 @@ Dep: T-011
   
   _Labels:_ `db,privacy`
 
-- [ ] **T-046** — Job de anonimização PII
+- [x] **T-046** — Job de anonimização PII
   
   Descrição: Mascarar dados sensíveis conforme política.
 CA: Relatório de linhas afetadas.
@@ -368,7 +368,7 @@ Dep: T-045
   
   _Labels:_ `db,privacy`
 
-- [ ] **T-047** — Job de limpeza hard-delete
+- [x] **T-047** — Job de limpeza hard-delete
   
   Descrição: Exclusão definitiva com dry-run.
 CA: Execução segura.
@@ -376,7 +376,7 @@ Dep: T-045
   
   _Labels:_ `db,privacy`
 
-- [ ] **T-048** — Testes SQL de integridade de fatos
+- [x] **T-048** — Testes SQL de integridade de fatos
   
   Descrição: Asserts de contagem e FK.
 CA: Suíte verde.
@@ -384,7 +384,7 @@ Dep: T-037
   
   _Labels:_ `db,tests`
 
-- [ ] **T-049** — Dicionário de dados
+- [x] **T-049** — Dicionário de dados
   
   Descrição: Documentar entidades/campos/relacionamentos.
 CA: /docs/data_dictionary.md.
@@ -392,7 +392,7 @@ Dep: T-036
   
   _Labels:_ `docs,db`
 
-- [ ] **T-050** — ADR-007: pgvector vs serviço vetorial
+- [x] **T-050** — ADR-007: pgvector vs serviço vetorial
   
   Descrição: Decisão para RAG.
 CA: ADR com prós/contras.
@@ -400,7 +400,7 @@ Dep: T-008
   
   _Labels:_ `adr,rag`
 
-- [ ] **T-051** — Esquema RAG (documents/embeddings)
+- [x] **T-051** — Esquema RAG (documents/embeddings)
   
   Descrição: Tabelas e migrações para RAG.
 CA: Migrações aplicáveis.
@@ -408,7 +408,7 @@ Dep: T-050
   
   _Labels:_ `db,rag`
 
-- [ ] **T-052** — CLI de ingestão RAG
+- [x] **T-052** — CLI de ingestão RAG
   
   Descrição: `ingest --path ...` para catálogo/políticas.
 CA: Ingestão com logs.
@@ -416,7 +416,7 @@ Dep: T-051
   
   _Labels:_ `rag,cli`
 
-- [ ] **T-053** — Versionamento de fontes RAG
+- [x] **T-053** — Versionamento de fontes RAG
   
   Descrição: Campo source_version e política.
 CA: Versão atualizada ao reingestar.
@@ -424,7 +424,7 @@ Dep: T-051
   
   _Labels:_ `rag,db`
 
-- [ ] **T-054** — Atualização de embeddings on-change
+- [x] **T-054** — Atualização de embeddings on-change
   
   Descrição: Trigger/job para reindex.
 CA: Atualização automática.
@@ -432,7 +432,7 @@ Dep: T-052
   
   _Labels:_ `rag,automation`
 
-- [ ] **T-055** — Testes de busca semântica
+- [x] **T-055** — Testes de busca semântica
   
   Descrição: Conjunto de casos com gold set.
 CA: Precisão mínima definida.
@@ -440,7 +440,7 @@ Dep: T-052
   
   _Labels:_ `rag,tests`
 
-- [ ] **T-056** — Criar instância e obter QR
+- [x] **T-056** — Criar instância e obter QR
   
   Descrição: Endpoint/script para criar instância e exibir QR.
 CA: QR armazenado; doc do fluxo.
@@ -448,7 +448,7 @@ Dep: T-018
   
   _Labels:_ `whatsapp,evolution`
 
-- [ ] **T-057** — Validar sessão ativa
+- [x] **T-057** — Validar sessão ativa
   
   Descrição: Ping/version para checar sessão.
 CA: Status OK/erro claro.
@@ -472,7 +472,7 @@ Dep: T-058
   
   _Labels:_ `whatsapp,storage`
 
-- [ ] **T-060** — Normalização de contatos (E.164)
+- [x] **T-060** — Normalização de contatos (E.164)
   
   Descrição: Função de normalização e testes.
 CA: Telefones uniformizados.
@@ -480,7 +480,7 @@ Dep: T-036
   
   _Labels:_ `whatsapp,data`
 
-- [ ] **T-061** — Agrupamento de conversas por janela
+- [x] **T-061** — Agrupamento de conversas por janela
   
   Descrição: Janela configurável para threads.
 CA: Casos de teste.
@@ -512,7 +512,7 @@ Dep: T-063
   
   _Labels:_ `queue,reliability`
 
-- [ ] **T-065** — Métrica de latência ponta-a-ponta
+- [x] **T-065** — Métrica de latência ponta-a-ponta
   
   Descrição: Recebido→respondido em fact_response.
 CA: Registros consistentes.
@@ -544,7 +544,7 @@ Dep: T-067
   
   _Labels:_ `security,api`
 
-- [ ] **T-069** — Documentar endpoints Evolution usados
+- [x] **T-069** — Documentar endpoints Evolution usados
   
   Descrição: /docs/evolution_endpoints.md.
 CA: Doc fechada.
@@ -560,7 +560,7 @@ Dep: T-066
   
   _Labels:_ `tests,e2e`
 
-- [ ] **T-071** — Configurar credencial OpenAI (placeholders)
+- [x] **T-071** — Configurar credencial OpenAI (placeholders)
   
   Descrição: Variáveis OPENAI_* e sem segredos no repo.
 CA: Injeção via secrets.
