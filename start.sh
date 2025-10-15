@@ -155,17 +155,31 @@ if [[ -z "$HEALTH_PATH" ]]; then
 fi
 
 BASE_URL="http://localhost:${API_PORT}${HEALTH_PATH}"
+MAX_ATTEMPTS="${EVOLUTION_HEALTHCHECK_ATTEMPTS:-10}"
+SLEEP_SECONDS="${EVOLUTION_HEALTHCHECK_INTERVAL_SECONDS:-60}"
+
 echo "==> Validando endpoint da Evolution API em ${BASE_URL} ..."
+SUCCESS=false
+for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
+  TMP_OUTPUT="$(mktemp)"
+  HTTP_CODE=$(curl "${CURL_OPTS[@]/%\/status/${HEALTH_PATH}}" -o "$TMP_OUTPUT" -w "%{http_code}" || echo "000")
+  cat "$TMP_OUTPUT"
+  echo
+  rm -f "$TMP_OUTPUT"
 
-TMP_OUTPUT="$(mktemp)"
-HTTP_CODE=$(curl "${CURL_OPTS[@]/%\/status/${HEALTH_PATH}}" -o "$TMP_OUTPUT" -w "%{http_code}")
-cat "$TMP_OUTPUT"
-echo
-rm -f "$TMP_OUTPUT"
+  if [[ "$HTTP_CODE" == "200" ]]; then
+    SUCCESS=true
+    echo "    ✓ Healthcheck respondeu 200 (tentativa ${attempt}/${MAX_ATTEMPTS})."
+    break
+  fi
 
-if [[ "$HTTP_CODE" != "200" ]]; then
+  echo "    Tentativa ${attempt}/${MAX_ATTEMPTS} falhou com HTTP ${HTTP_CODE}. Aguardando ${SLEEP_SECONDS}s..."
+  sleep "$SLEEP_SECONDS"
+done
+
+if ! $SUCCESS; then
   cat <<EOF >&2
-warning: endpoint retornou status HTTP ${HTTP_CODE}.
+warning: Evolution API não respondeu 200 após ${MAX_ATTEMPTS} tentativas.
 Verifique se ${HEALTH_PATH} é o caminho correto ou ajuste EVOLUTION_HEALTHCHECK_PATH no .env.
 EOF
 fi

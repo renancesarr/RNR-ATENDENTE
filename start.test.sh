@@ -76,36 +76,62 @@ fi
 command -v docker >/dev/null 2>&1 || { echo "error: docker não encontrado no PATH." >&2; exit 1; }
 
 echo "==> Validando estado dos containers..."
-FAIL=0
-while IFS= read -r name; do
-  [[ -z "$name" || "$name" == \#* ]] && continue
-  CID="$(docker ps -aq -f name="^${name}$")"
-  if [[ -z "$CID" ]]; then
-    echo "   - Container '$name' não está em execução (ok se perfil/prod não foi habilitado)."
-    continue
+MAX_CONTAINER_ATTEMPTS="${TEST_CONTAINER_ATTEMPTS:-10}"
+CONTAINER_SLEEP_SECONDS="${TEST_CONTAINER_INTERVAL_SECONDS:-30}"
+ATTEMPT=1
+while [[ $ATTEMPT -le $MAX_CONTAINER_ATTEMPTS ]]; do
+  echo "   Tentativa ${ATTEMPT}/${MAX_CONTAINER_ATTEMPTS}..."
+  FAIL=0
+  while IFS= read -r name; do
+    [[ -z "$name" || "$name" == \#* ]] && continue
+    CID="$(docker ps -aq -f name="^${name}$")"
+    if [[ -z "$CID" ]]; then
+      echo "     - $name: não encontrado (ok se perfil não foi iniciado)."
+      continue
+    fi
+
+    STATUS="$(docker inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$name" 2>/dev/null || echo "unknown")"
+    echo "     - $name -> $STATUS"
+    case "$STATUS" in
+      healthy|running)
+        ;;
+      starting)
+        FAIL=1
+        ;;
+      *)
+        echo "error: container '$name' reportou status '$STATUS'." >&2
+        FAIL=2
+        ;;
+    esac
+  done < "$CONTAINER_LIST"
+
+  if [[ $FAIL -eq 0 ]]; then
+    echo "==> Containers validados com sucesso."
+    break
   fi
 
-  STATUS="$(docker inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$name" 2>/dev/null || echo "unknown")"
-  echo "   - $name -> $STATUS"
-  case "$STATUS" in
-    healthy|running)
-      ;;
-    *)
-      echo "error: container '$name' não está saudável (status: $STATUS)." >&2
-      FAIL=1
-      ;;
-  esac
-done < "$CONTAINER_LIST"
+  if [[ $FAIL -eq 2 ]]; then
+    echo "==> Falha crítica na validação dos containers." >&2
+    if ! $KEEP_RUNNING; then
+      "$STOP_SCRIPT" || true
+    fi
+    exit 1
+  fi
 
-if [[ $FAIL -ne 0 ]]; then
-  echo "==> Falha na validação dos containers." >&2
+  ATTEMPT=$((ATTEMPT + 1))
+  if [[ $ATTEMPT -le $MAX_CONTAINER_ATTEMPTS ]]; then
+    echo "   Containers ainda inicializando. Aguardando ${CONTAINER_SLEEP_SECONDS}s..."
+    sleep "$CONTAINER_SLEEP_SECONDS"
+  fi
+done
+
+if [[ $FAIL -ne 0 && $FAIL -ne 2 ]]; then
+  echo "==> Containers não ficaram saudáveis após ${MAX_CONTAINER_ATTEMPTS} tentativas." >&2
   if ! $KEEP_RUNNING; then
     "$STOP_SCRIPT" || true
   fi
   exit 1
 fi
-
-echo "==> Containers validados com sucesso."
 
 if ! $KEEP_RUNNING; then
   echo "==> Encerrando ambiente (stop.sh)..."
