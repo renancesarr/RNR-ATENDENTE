@@ -22,6 +22,7 @@ docker compose up -d
 ```
 
 - Para incluir os serviços opcionais (`typebot-*`, `watchtower`), utilize `docker compose --profile prod up -d`.
+- Também é possível usar o script automatizado: `./start.sh` (adicionar `--with-prod` para incluir o perfil `prod`).
 
 ## 3. Confirmar que tudo está healthy
 ```bash
