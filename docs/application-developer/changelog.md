@@ -63,6 +63,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Retries para healthcheck/start testável — [1760533475-ia-code.md](1760533475-ia-code.md)
 - Healthcheck da Evolution API aponta para `/` — [1760534097-ia-code.md](1760534097-ia-code.md)
 - Remoção do `.env` inadvertidamente commitado — [1760534671-ia-code.md](1760534671-ia-code.md)
+- Docs do compose movidas para Solution Architect — [1760537762-ia-code.md](1760537762-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
