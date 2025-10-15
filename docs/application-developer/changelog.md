@@ -57,6 +57,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Nota sobre uso do `.env` no compose — [1760522508-ia-code.md](1760522508-ia-code.md)
 - Script `start.sh` para automação do compose — [1760522881-ia-code.md](1760522881-ia-code.md)
 - Ajustes do `start.sh` com `--env-file` e healthcheck configurável — [1760529913-ia-code.md](1760529913-ia-code.md)
+- Geração automática do `docker-compose.yaml` via start.sh — [1760530731-ia-code.md](1760530731-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

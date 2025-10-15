@@ -20,6 +20,7 @@ cd "$PROJECT_ROOT"
 
 ENV_FILE="$PROJECT_ROOT/.env"
 ENV_EXAMPLE="$PROJECT_ROOT/.env.example"
+GENERATED_COMPOSE="$PROJECT_ROOT/docker-compose.yaml"
 
 if [[ ! -f "$ENV_FILE" ]]; then
   if [[ -f "$ENV_EXAMPLE" ]]; then
@@ -30,6 +31,11 @@ if [[ ! -f "$ENV_FILE" ]]; then
   fi
   exit 1
 fi
+
+# shellcheck disable=SC1090
+set -a
+source "$ENV_FILE"
+set +a
 
 INCLUDE_PROD=false
 SKIP_PULL=false
@@ -61,8 +67,12 @@ if $INCLUDE_PROD; then
   COMPOSE_ARGS+=(--profile prod)
 fi
 
+echo "==> Gerando docker-compose.yaml (resolvido com variáveis)..."
+docker compose --project-directory "$PROJECT_ROOT" --env-file "$ENV_FILE" config > "$GENERATED_COMPOSE"
+echo "    Arquivo gerado: $GENERATED_COMPOSE"
+
 compose_cmd() {
-  docker compose --env-file "$ENV_FILE" "${COMPOSE_ARGS[@]}" "$@"
+  docker compose --project-directory "$PROJECT_ROOT" -f "$GENERATED_COMPOSE" "${COMPOSE_ARGS[@]}" "$@"
 }
 
 command -v docker >/dev/null 2>&1 || { echo "error: docker não encontrado no PATH." >&2; exit 1; }
