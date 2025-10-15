@@ -176,7 +176,7 @@ Dep: T-016
   
   _Labels:_ `infra,dx`
 
-- [ ] **T-023** — Proxy reverso com API key (NGINX/Caddy)
+- [x] **T-023** — Proxy reverso com API key (NGINX/Caddy)
   
   Descrição: Proteger Evolution API com header de autorização.
 CA: Requisições sem header falham.

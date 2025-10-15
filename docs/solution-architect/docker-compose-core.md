@@ -24,10 +24,16 @@ Este guia resume a configuração atual do `docker-compose.yml` para atender às
 
 - **Evolution API (`evolution-api`)**
   - Imagem `evoapicloud/evolution-api:v2.3.4`.
-  - Porta HTTP/WS configurável via `.env`.
+  - Mantida apenas na rede interna; acesso externo passa pelo proxy.
   - Volume `evolution_instances` preserva sessões WhatsApp (T-019).
   - `depends_on` com condição `service_healthy` para Postgres, Redis e RabbitMQ.
-  - Healthcheck (placeholder `GET /status`) — ajustar endpoint real conforme documentação oficial.
+  - Healthcheck interno (placeholder `GET /status`) — ajustar endpoint real conforme documentação oficial.
+
+- **Reverse Proxy (`reverse-proxy`)**
+  - Imagem `nginx:1.25-alpine`.
+  - Expõe as portas `${EVOLUTION_PROXY_HTTP_PORT:-8088}` e `${EVOLUTION_PROXY_WS_PORT:-8089}` para HTTP/WS.
+  - Exige header `Authorization: Bearer <EVOLUTION_AUTH_KEY>` (substituído via `envsubst`) antes de encaminhar ao `evolution-api`.
+  - Healthcheck básico (`wget http://localhost:8080/`) garante que a página de boas-vindas esteja disponível.
 
 ## Volumes nomeados
 
@@ -58,14 +64,15 @@ Rede bridge dedicada garante isolamento entre serviços e facilita integração 
 ## Como validar
 
 ```bash
-# Subir serviços padrão (T-016 a T-018)
-docker compose up -d
+# Subir serviços padrão (T-016 a T-018) através do Makefile
+make up
 
 # Verificar healthchecks
 docker compose ps
 
 # Conferir logs específicos
 docker compose logs postgres
+docker compose logs reverse-proxy
 docker compose logs evolution-api
 ```
 
@@ -75,6 +82,6 @@ docker compose logs evolution-api
 
 ## Próximos passos
 
-1. Ajustar endpoint real do healthcheck da Evolution API assim que confirmarmos documentação oficial.
-2. Avaliar necessidade de healthcheck customizado para RabbitMQ (fila específica) quando os consumidores estiverem ativos.
-3. Criar comandos `make up/down/logs` (T-022) para simplificar operações diárias.
+1. Confirmar se o caminho de healthcheck (`/`) permanece estável nas próximas versões da Evolution API e refletir no template Nginx.
+2. Avaliar healthcheck customizado para RabbitMQ (fila específica) quando os consumidores estiverem ativos.
+3. Revisar se endpoints externos devem trafegar via HTTPS (certificados/terminação TLS) em ambientes superiores.
