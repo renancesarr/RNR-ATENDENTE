@@ -18,14 +18,22 @@ EOF
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$PROJECT_ROOT"
 
-ENV_FILE="$PROJECT_ROOT/.env"
+DEFAULT_ENV_FILE="$PROJECT_ROOT/.env"
 ENV_EXAMPLE="$PROJECT_ROOT/.env.example"
+LOCAL_ENV_FILE="$PROJECT_ROOT/.env.local"
+
+if [[ -f "$LOCAL_ENV_FILE" ]]; then
+  ENV_FILE="$LOCAL_ENV_FILE"
+else
+  ENV_FILE="$DEFAULT_ENV_FILE"
+fi
+
 GENERATED_COMPOSE="$PROJECT_ROOT/docker-compose.yaml"
 
 if [[ ! -f "$ENV_FILE" ]]; then
   if [[ -f "$ENV_EXAMPLE" ]]; then
-    echo "error: arquivo .env não encontrado em $ENV_FILE." >&2
-    echo "Crie-o a partir de .env.example e preencha as credenciais necessárias." >&2
+    echo "error: nenhum arquivo de ambiente (.env ou .env.local) encontrado." >&2
+    echo "Crie um a partir de .env.example e preencha as credenciais necessárias." >&2
   else
     echo "error: nenhum .env encontrado; gere um antes de continuar." >&2
   fi
@@ -88,7 +96,11 @@ command -v curl >/dev/null 2>&1 || { echo "error: curl é necessário para valid
 extract_env_value() {
   local key="$1"
   local value
-  value="$(grep -E "^$key=" "$ENV_FILE" | tail -n1 | cut -d= -f2-)"
+  local value
+  value=""
+  if [[ -f "$ENV_FILE" ]]; then
+    value="$(grep -E "^$key=" "$ENV_FILE" | tail -n1 | cut -d= -f2-)"
+  fi
   echo "$value"
 }
 

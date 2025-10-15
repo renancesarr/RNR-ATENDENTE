@@ -31,8 +31,10 @@ env/
 
 # Environment files & secrets
 .env
+.env.local
 .env.*
 !.env.example
+.env.local.example
 .docker-compose.yaml
 docker-compose.yaml
 .docker-compose.yml
