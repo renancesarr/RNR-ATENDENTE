@@ -33,9 +33,11 @@ if [[ ! -f "$ENV_FILE" ]]; then
 fi
 
 # shellcheck disable=SC1090
+set +u
 set -a
 source "$ENV_FILE"
 set +a
+set -u
 
 INCLUDE_PROD=false
 SKIP_PULL=false
