@@ -61,6 +61,10 @@ if $INCLUDE_PROD; then
   COMPOSE_ARGS+=(--profile prod)
 fi
 
+compose_cmd() {
+  docker compose --env-file "$ENV_FILE" "${COMPOSE_ARGS[@]}" "$@"
+}
+
 command -v docker >/dev/null 2>&1 || { echo "error: docker não encontrado no PATH." >&2; exit 1; }
 command -v curl >/dev/null 2>&1 || { echo "error: curl é necessário para validar o endpoint da Evolution API." >&2; exit 1; }
 
@@ -77,23 +81,23 @@ if [[ -z "$POSTGRES_DB_VALUE" ]]; then
 fi
 
 echo "==> Validando ambiente..."
-docker compose "${COMPOSE_ARGS[@]}" config >/dev/null
+compose_cmd config >/dev/null
 
 if ! $SKIP_PULL; then
   echo "==> Baixando imagens (docker compose pull)..."
-  docker compose "${COMPOSE_ARGS[@]}" pull
+  compose_cmd pull
 else
   echo "==> Pulando docker compose pull (flag --skip-pull)."
 fi
 
 echo "==> Subindo serviços (docker compose up -d)..."
-docker compose "${COMPOSE_ARGS[@]}" up -d
+compose_cmd up -d
 
 echo "==> Status dos serviços:"
-docker compose "${COMPOSE_ARGS[@]}" ps
+compose_cmd ps
 
 run_compose_exec() {
-  docker compose "${COMPOSE_ARGS[@]}" exec -T "$@"
+  compose_cmd exec -T "$@"
 }
 
 echo "==> Checando Postgres..."
@@ -106,7 +110,7 @@ echo "==> Checando RabbitMQ..."
 run_compose_exec rabbitmq rabbitmq-diagnostics -q status
 
 echo "==> Obtendo porta mapeada da Evolution API..."
-API_PORT_RAW="$(docker compose "${COMPOSE_ARGS[@]}" port evolution-api 8080 || true)"
+API_PORT_RAW="$(compose_cmd port evolution-api 8080 || true)"
 if [[ -z "$API_PORT_RAW" ]]; then
   echo "error: não foi possível determinar a porta da Evolution API. Verifique se o serviço está em execução." >&2
   exit 1
@@ -123,17 +127,34 @@ if [[ -z "$AUTH_KEY" ]]; then
   AUTH_KEY="$(extract_env_value 'AUTHENTICATION_API_KEY')"
 fi
 
-CURL_OPTS=(-fsS "http://localhost:${API_PORT}/status")
+CURL_OPTS=(-sS "http://localhost:${API_PORT}/status")
 if [[ -n "$AUTH_KEY" ]]; then
-  CURL_OPTS=(-fsS -H "Authorization: Bearer ${AUTH_KEY}" "http://localhost:${API_PORT}/status")
+  CURL_OPTS=(-sS -H "Authorization: Bearer ${AUTH_KEY}" "http://localhost:${API_PORT}/status")
 fi
 
-echo "==> Validando endpoint da Evolution API em http://localhost:${API_PORT}/status ..."
-curl "${CURL_OPTS[@]}"
+HEALTH_PATH="$(extract_env_value 'EVOLUTION_HEALTHCHECK_PATH')"
+if [[ -z "$HEALTH_PATH" ]]; then
+  HEALTH_PATH="/status"
+fi
+
+BASE_URL="http://localhost:${API_PORT}${HEALTH_PATH}"
+echo "==> Validando endpoint da Evolution API em ${BASE_URL} ..."
+
+TMP_OUTPUT="$(mktemp)"
+HTTP_CODE=$(curl "${CURL_OPTS[@]/%\/status/${HEALTH_PATH}}" -o "$TMP_OUTPUT" -w "%{http_code}")
+cat "$TMP_OUTPUT"
 echo
+rm -f "$TMP_OUTPUT"
+
+if [[ "$HTTP_CODE" != "200" ]]; then
+  cat <<EOF >&2
+warning: endpoint retornou status HTTP ${HTTP_CODE}.
+Verifique se ${HEALTH_PATH} é o caminho correto ou ajuste EVOLUTION_HEALTHCHECK_PATH no .env.
+EOF
+fi
 
 echo "==> Logs recentes da Evolution API:"
-docker compose "${COMPOSE_ARGS[@]}" logs --tail 20 evolution-api || true
+compose_cmd logs --tail 20 evolution-api || true
 
 cat <<'EOF'
 

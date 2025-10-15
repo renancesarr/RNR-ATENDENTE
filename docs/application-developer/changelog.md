@@ -56,6 +56,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Guia de execução do compose e validação de endpoint — [1760520067-ia-code.md](1760520067-ia-code.md)
 - Nota sobre uso do `.env` no compose — [1760522508-ia-code.md](1760522508-ia-code.md)
 - Script `start.sh` para automação do compose — [1760522881-ia-code.md](1760522881-ia-code.md)
+- Ajustes do `start.sh` com `--env-file` e healthcheck configurável — [1760529913-ia-code.md](1760529913-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.
