@@ -2,7 +2,7 @@
 
 | Método | Endpoint | Descrição | Observações |
 | --- | --- | --- | --- |
-| `POST` | `/instances/create` | Cria instância WhatsApp, podendo solicitar QR code em base64. | Payload inclui `instanceName`, `cid`, `token`, `qrcode.generate`. Usado por `tools/evolution-bootstrap.py`. |
+| `POST` | `/instances/create` | Cria instância WhatsApp, podendo solicitar QR code em base64. | Payload inclui `instanceName`, `cid`, `token`, `qrcode.generate`. Usado por `scripts/evolution-login.sh`. |
 | `GET` | `/instances/{instance}/qrcode` | Obtém QR code atual da instância. | Retorna base64 quando sessão não está autenticada. Polling após criação. |
 | `GET` | `/instances/{instance}/status` | Consulta estado da sessão (connected/disconnected). | Usado pelo script de verificação `tools/evolution-session-check.py`. |
 

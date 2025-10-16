@@ -3,17 +3,21 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: ./start.test.sh [--with-prod] [--skip-pull] [--keep-running]
+Usage: ./start.test.sh [--with-prod] [--update] [--no-keep-running]
 
 Executa o ciclo completo de testes locais:
   1. Sobe o ambiente via ./start.sh (com as flags repassadas).
   2. Valida que os containers essenciais estão em execução e saudáveis.
-  3. Encerra o ambiente ao final (a menos que --keep-running seja informado).
+  3. Mantém o ambiente disponível para inspeção (use --no-keep-running para encerrar automaticamente).
 
 Opções:
   --with-prod      Passa a flag correspondente ao start.sh (inclui perfil prod).
-  --skip-pull      Repasse direto para start.sh (evita baixar imagens).
-  --keep-running   Não chama ./stop.sh ao final (útil para inspeções manuais).
+  --skip-pull      Repasse direto para start.sh (não baixa imagens, padrão).
+  --no-skip-pull, --update
+                   Repasse para start.sh forçando docker compose pull.
+  --keep-running   Mantém os containers após o teste (padrão).
+  --no-keep-running
+                   Executa ./stop.sh ao final do ciclo.
   -h, --help       Exibe esta ajuda.
 EOF
 }
@@ -26,6 +30,79 @@ START_SCRIPT="$PROJECT_ROOT/start.sh"
 STOP_SCRIPT="$PROJECT_ROOT/stop.sh"
 CONTAINER_LIST="$PROJECT_ROOT/docker/container-names.txt"
 GENERATED_COMPOSE="$PROJECT_ROOT/docker-compose.yaml"
+DEFAULT_ENV_FILE="$PROJECT_ROOT/.env"
+LOCAL_ENV_FILE="$PROJECT_ROOT/.env.local"
+
+if [[ -f "$LOCAL_ENV_FILE" ]]; then
+  ENV_FILE="$LOCAL_ENV_FILE"
+else
+  ENV_FILE="$DEFAULT_ENV_FILE"
+fi
+
+extract_env_value() {
+  local key="$1"
+  if [[ -f "$ENV_FILE" ]]; then
+    grep -E "^$key=" "$ENV_FILE" | tail -n1 | cut -d= -f2-
+  else
+    echo ""
+  fi
+}
+
+attempt_evolution_login_test() {
+  local login_script="$PROJECT_ROOT/scripts/evolution-login.sh"
+  if [[ ! -x "$login_script" ]]; then
+    echo "==> Script de login automático não encontrado (${login_script}); pulando exibição do QR."
+    return
+  fi
+
+  local port_raw
+  port_raw="$(docker compose --project-directory "$PROJECT_ROOT" -f "$GENERATED_COMPOSE" port reverse-proxy 8080 2>/dev/null || true)"
+  if [[ -z "$port_raw" ]]; then
+    echo "==> Porta do proxy não identificada; pulando login automático."
+    return
+  fi
+
+  local api_port
+  api_port="$(echo "$port_raw" | tail -n1 | awk -F: '{print $NF}')"
+  if [[ -z "$api_port" ]]; then
+    echo "==> Porta da Evolution API não identificada; pulando login automático."
+    return
+  fi
+
+  local instance_name="${EVOLUTION_INSTANCE_NAME:-$(extract_env_value 'EVOLUTION_INSTANCE_NAME')}"
+  if [[ -z "$instance_name" ]]; then
+    instance_name="mvp-bot"
+  fi
+
+  local qr_output
+  qr_output="$(mktemp "${TMPDIR:-/tmp}/evolution-qr-XXXX.png")"
+
+  echo "==> Tentando login WhatsApp (instância '${instance_name}')..."
+  if "$login_script" --env-file "$ENV_FILE" --base-url "http://localhost:${api_port}" --instance "$instance_name" --qr-output "$qr_output"; then
+    echo "    Abra o arquivo $qr_output para ler o QR code exibido acima."
+    if ! $KEEP_RUNNING; then
+      echo "    Observação: use --no-keep-running se quiser que o ciclo encerre automaticamente."
+    fi
+    return
+  fi
+
+  local status=$?
+  case "$status" in
+    2)
+      echo "    Aviso: token de autenticação não configurado; pulando login automático."
+      ;;
+    3)
+      echo "    Aviso: dependências para obter o QR (curl/jq/base64) não disponíveis; instale-as ou mantenha EVOLUTION_LOGIN_SKIP_AUTO=1."
+      ;;
+    4)
+      echo "    Aviso: utilitário scripts/fetch-qr.sh não encontrado; verifique o repositório."
+      ;;
+    *)
+      echo "    warning: falha ao obter o QR code (status ${status})."
+      ;;
+  esac
+  rm -f "$qr_output"
+}
 
 if [[ ! -x "$START_SCRIPT" ]]; then
   echo "error: start.sh não encontrado ou sem permissão de execução." >&2
@@ -41,16 +118,20 @@ if [[ ! -f "$CONTAINER_LIST" ]]; then
 fi
 
 PASSTHRU_ARGS=()
-KEEP_RUNNING=false
+KEEP_RUNNING=true
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --with-prod|--skip-pull)
+    --with-prod|--skip-pull|--update|--no-skip-pull)
       PASSTHRU_ARGS+=("$1")
       shift
       ;;
     --keep-running)
       KEEP_RUNNING=true
+      shift
+      ;;
+    --no-keep-running)
+      KEEP_RUNNING=false
       shift
       ;;
     -h|--help)
@@ -66,7 +147,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo "==> Iniciando ciclo de teste..."
-"$START_SCRIPT" "${PASSTHRU_ARGS[@]}"
+EVOLUTION_LOGIN_SKIP_AUTO=1 "$START_SCRIPT" "${PASSTHRU_ARGS[@]}"
 
 if [[ ! -f "$GENERATED_COMPOSE" ]]; then
   echo "error: arquivo $GENERATED_COMPOSE não encontrado após start.sh." >&2
@@ -133,11 +214,15 @@ if [[ $FAIL -ne 0 && $FAIL -ne 2 ]]; then
   exit 1
 fi
 
+if [[ ${FAIL:-0} -eq 0 ]]; then
+  attempt_evolution_login_test
+fi
+
 if ! $KEEP_RUNNING; then
   echo "==> Encerrando ambiente (stop.sh)..."
   "$STOP_SCRIPT"
 else
-  echo "==> Mantendo ambiente em execução conforme solicitado (--keep-running)."
+  echo "==> Mantendo ambiente em execução. Use --no-keep-running para encerrar automaticamente após os testes."
 fi
 
 echo "Ciclo de teste concluído com sucesso."

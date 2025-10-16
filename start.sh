@@ -3,11 +3,13 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: ./start.sh [--with-prod] [--skip-pull]
+Usage: ./start.sh [--with-prod] [--update] [--skip-pull]
 
 Options:
   --with-prod   Inclui serviços opcionais do perfil "prod" (typebot, watchtower).
-  --skip-pull   Não executa "docker compose pull" antes de subir os serviços.
+  --skip-pull   Não executa "docker compose pull" (padrão).
+  --no-skip-pull, --update
+                Executa "docker compose pull" antes de subir os serviços.
   -h, --help    Mostra esta ajuda.
 
 O script deve ser executado a partir da raiz do repositório. Garante que o
@@ -48,7 +50,7 @@ set +a
 set -u
 
 INCLUDE_PROD=false
-SKIP_PULL=false
+SKIP_PULL=true
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -58,6 +60,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --skip-pull)
       SKIP_PULL=true
+      shift
+      ;;
+    --no-skip-pull|--update)
+      SKIP_PULL=false
       shift
       ;;
     -h|--help)
@@ -102,6 +108,65 @@ extract_env_value() {
     value="$(grep -E "^$key=" "$ENV_FILE" | tail -n1 | cut -d= -f2-)"
   fi
   echo "$value"
+}
+
+attempt_evolution_login() {
+  local port="$1"
+
+  if [[ "${EVOLUTION_LOGIN_SKIP_AUTO:-}" == "1" ]]; then
+    return
+  fi
+
+  local login_script="$PROJECT_ROOT/scripts/evolution-login.sh"
+  if [[ ! -x "$login_script" ]]; then
+    echo "==> Script de login automático não encontrado (${login_script}); pulando."
+    return
+  fi
+
+  local auth_key="${EVOLUTION_AUTH_KEY:-${AUTHENTICATION_API_KEY:-}}"
+  if [[ -z "$auth_key" ]]; then
+    auth_key="$(extract_env_value 'EVOLUTION_AUTH_KEY')"
+  fi
+  if [[ -z "$auth_key" ]]; then
+    auth_key="$(extract_env_value 'AUTHENTICATION_API_KEY')"
+  fi
+  if [[ -z "$auth_key" ]]; then
+    echo "==> Token de autenticação da Evolution API ausente; configure AUTHENTICATION_API_KEY antes de tentar o login automático."
+    return
+  fi
+
+  local instance_name
+  instance_name="${EVOLUTION_INSTANCE_NAME:-$(extract_env_value 'EVOLUTION_INSTANCE_NAME')}"
+  if [[ -z "$instance_name" ]]; then
+    instance_name="mvp-bot"
+  fi
+
+  local base_url="http://localhost:${port}"
+  local qr_output
+  qr_output="$(mktemp "${TMPDIR:-/tmp}/evolution-qr-XXXX.png")"
+
+  echo "==> Tentando login WhatsApp (instância '${instance_name}')..."
+  if "$login_script" --env-file "$ENV_FILE" --base-url "$base_url" --instance "$instance_name" --qr-output "$qr_output"; then
+    echo "    Abra o arquivo $qr_output para ler o QR code exibido acima."
+    return
+  fi
+
+  local status=$?
+  case "$status" in
+    2)
+      echo "    Aviso: token de autenticação não configurado; pulando login automático."
+      ;;
+    3)
+      echo "    Aviso: dependências para obter o QR (curl/jq/base64) não disponíveis; instale-as ou configure EVOLUTION_LOGIN_SKIP_AUTO=1."
+      ;;
+    4)
+      echo "    Aviso: utilitário scripts/fetch-qr.sh não encontrado; verifique o repositório."
+      ;;
+    *)
+      echo "    warning: falha ao obter o QR code (status ${status})."
+      ;;
+  esac
+  rm -f "$qr_output"
 }
 
 POSTGRES_DB_VALUE="$(extract_env_value 'POSTGRES_DB')"
@@ -194,6 +259,8 @@ if ! $SUCCESS; then
 warning: Evolution API não respondeu 200 após ${MAX_ATTEMPTS} tentativas.
 Verifique se ${HEALTH_PATH} é o caminho correto ou ajuste EVOLUTION_HEALTHCHECK_PATH no .env.
 EOF
+else
+  attempt_evolution_login "$API_PORT"
 fi
 
 echo "==> Logs recentes da Evolution API:"

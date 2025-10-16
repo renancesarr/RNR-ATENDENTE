@@ -69,6 +69,7 @@ Use este documento para consolidar entregas por período. Cada entrada deve link
 - Proxy Nginx com API key (T-023) — [1760546452-ia-code.md](1760546452-ia-code.md)
 - Portas e exposição documentadas — [1760547320-ia-code.md](1760547320-ia-code.md)
 - Teste de carga leve do boot — [1760567848-ia-code.md](1760567848-ia-code.md)
+- Login automático pós-healthcheck (shell) + flags `--update`/`--no-keep-running` nos scripts de bootstrap — [1760573504-ia-code.md](1760573504-ia-code.md)
 
 ## Como atualizar
 1. Adicione uma nova seção mensal (`## AAAA-MM`) quando iniciar atividades no período.

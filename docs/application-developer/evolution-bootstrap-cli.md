@@ -1,28 +1,31 @@
-# CLI de Bootstrap da Evolution API
+# Login automático da Evolution API
 
-Script: `tools/evolution-bootstrap.py`
+Script: `scripts/evolution-login.sh`
 
 ## Uso básico
 
 ```bash
-./tools/evolution-bootstrap.py --instance mvp-bot --qr-output qr.png
+./scripts/evolution-login.sh --instance mvp-bot --qr-output qr.png
 ```
 
 Parâmetros principais:
-- `--instance` (obrigatório): nome da instância.
-- `--base-url`: URL do serviço (`http://localhost:<porta>` por padrão).
-- `--poll-seconds`: intervalo entre tentativas de obter o QR (default 5s).
-- `--max-attempts`: número máximo de polls (default 12 ≈ 1 minuto).
-- `--qr-output`: salva QR (base64) como PNG decodificado.
-- `--print-only`: mostra payloads sem chamar a API (uso para review).
+- `--instance`: nome da instância (padrão `EVOLUTION_INSTANCE_NAME` ou `mvp-bot`).
+- `--env-file`: arquivo `.env` a ser carregado antes de chamar os endpoints (default `./.env`).
+- `--base-url`: URL do serviço (default `http://localhost:<porta>` com porta encontrada no `.env`).
+- `--qr-output`: caminho para salvar o PNG gerado a partir do base64 retornado.
 
 Requisitos:
-- `AUTHENTICATION_API_KEY` definido no `.env` (ou `EVOLUTION_AUTH_KEY`).
+- `AUTHENTICATION_API_KEY` (ou `EVOLUTION_AUTH_KEY`) definido no `.env`/`.env.local`.
+- `curl`, `jq` e `base64` disponíveis no PATH.
 - Evolution API ativa (`docker compose up -d`).
 
 Fluxo:
-1. Faz `POST /instances/create` para gerar instância (payload inclui `qrcode.generate`).
-2. Faz polling `GET /instances/<instance>/qrcode` até receber campo `base64`.
-3. Exibe o QR no console e opcionalmente salva em arquivo.
+1. Garante que o token esteja configurado e resolve parâmetros necessários.
+2. Cria (ou reaproveita) a instância via `POST /instances/create`.
+3. Busca o QR em base64 (`GET /instances/<instance>/qrcode`), imprimindo o valor no terminal e decodificando para PNG se `--qr-output` for fornecido.
 
-Falhas retornam código ≠ 0 e mensagem detalhada (body HTTP) para diagnóstico.
+Códigos de saída:
+- `0`: QR obtido com sucesso.
+- `2`: token de autenticação ausente.
+- `3`: dependências (`curl`, `jq` ou `base64`) ausentes.
+- `4`: script auxiliar `scripts/fetch-qr.sh` não encontrado.

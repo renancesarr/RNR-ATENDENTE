@@ -168,7 +168,7 @@ Dep: T-016
   
   _Labels:_ `infra,security`
 
-- [ ] **T-022** — Makefile (up/down/logs)
+- [x] **T-022** — Makefile (up/down/logs)
   
   Descrição: Facilitar ciclo de vida: up, down, logs, e2e.
 CA: make up/down/logs funcionando.
