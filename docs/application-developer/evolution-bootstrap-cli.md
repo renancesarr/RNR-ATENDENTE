@@ -21,8 +21,8 @@ Requisitos:
 
 Fluxo:
 1. Garante que o token esteja configurado e resolve parâmetros necessários.
-2. Cria (ou reaproveita) a instância via `POST /instances/create`.
-3. Busca o QR em base64 (`GET /instances/<instance>/qrcode`), imprimindo o valor no terminal e decodificando para PNG se `--qr-output` for fornecido.
+2. Cria (ou reaproveita) a instância via `POST /instance/create` com integração padrão `WHATSAPP-BAILEYS`.
+3. Conecta a instância e obtém o QR (`GET /instance/connect/<instance>`), imprimindo o base64 e salvando o PNG quando solicitado.
 
 Códigos de saída:
 - `0`: QR obtido com sucesso.
